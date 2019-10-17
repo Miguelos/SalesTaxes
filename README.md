@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Miguelos/SalesTaxes.svg?token=x5PjLMqoco4Nzoy15yu3&branch=master)](https://travis-ci.com/Miguelos/SalesTaxes) [![codecov](https://codecov.io/gh/Miguelos/SalesTaxes/branch/master/graph/badge.svg?token=uSnwph6Ahk)](https://codecov.io/gh/Miguelos/SalesTaxes)
+[![Build Status](https://travis-ci.org/Miguelos/SalesTaxes.svg?branch=master)](https://travis-ci.org/Miguelos/SalesTaxes) [![codecov](https://codecov.io/gh/Miguelos/SalesTaxes/branch/master/graph/badge.svg?token=uSnwph6Ahk)](https://codecov.io/gh/Miguelos/SalesTaxes)
 
 # Sales Taxes
 
