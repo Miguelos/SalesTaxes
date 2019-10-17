@@ -79,11 +79,11 @@ class TaxCalculator {
           .append(i)
           .append(": ")
           .append(getPriceAfterTaxes(quantity, i))
-          .append("\r\n");
+          .append("\n");
     }
     sb.append("Sales Taxes: ")
         .append(salesTaxes)
-        .append("\r\n");
+        .append("\n");
     sb.append("Total: ")
         .append(price);
     return sb.toString();

@@ -2,10 +2,8 @@ package me.miguelos.taxcalculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -41,11 +39,15 @@ class TaxCalculatorTest {
 
   void taxCalculatorTestFromFile(String inputFile, String expectedOutputFile) {
     TaxCalculator tc = new TaxCalculator();
-    BufferedReader reader;
+    Scanner scanner;
     try {
-      reader = new BufferedReader(new FileReader("src/test/resources/" + inputFile));
-      String line;
-      while ((line = reader.readLine()) != null && !line.isEmpty()) {
+      scanner = new Scanner(
+          new File("src/test/resources/" + inputFile),
+          "UTF-8"
+      );
+
+      while (scanner.hasNext()) {
+        String line = scanner.nextLine();
         String[] split = line.split(" at ");
         BigDecimal price = BigDecimal.valueOf(Double.parseDouble(split[1]));
         int firstSpace = split[0].indexOf(' ');
@@ -60,7 +62,7 @@ class TaxCalculatorTest {
         );
         tc.addItem(quantity, it);
       }
-      reader.close();
+      scanner.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -69,9 +71,10 @@ class TaxCalculatorTest {
 
   private void assertResultFile(String receipt, String expectedOutputFile) {
     try {
-      String content = new Scanner(new File("src/test/resources/" + expectedOutputFile))
-          .useDelimiter("\\Z")
-          .next();
+      String content = new Scanner(
+          new File("src/test/resources/" + expectedOutputFile),
+          "UTF-8"
+      ).useDelimiter("\\Z").next();
       assertEquals(content, receipt);
     } catch (FileNotFoundException ex) {
       ex.printStackTrace();
