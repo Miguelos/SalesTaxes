@@ -1,0 +1,6 @@
+2 imported bottle of perfume: 60.18
+4 bottle of perfume: 77.86
+2 packet of headache pills: 19.50
+3 box of imported chocolates: 34.35
+Sales Taxes: 6.70
+Total: 191.89
