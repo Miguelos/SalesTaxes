@@ -18,6 +18,19 @@ To build the project and run the tests use Gradle.
 
 ## Notes
 
+* Use of BigDecimal for computations for the precision that it offers and to avoid rounding errors.
 * Sales taxes are composed by _Basic sales taxes_ and _Import taxes_. Therefore an imported item should have applied both if applicable.
 * Round rule is applied separately to each tax increment.
 * The data source is out of the scope and it is the tests that use files to load the test data into the program.
+
+## Input files for testing:
+
+Input files have LF Unix type Line Separators (\n).
+Each line of the input files for testing are in the format:
+```
+(\d+) (.*) at (\d+\.\d{2})\n
+```
+* Where the first group in the regular expression is the quantity of the product. 
+* Second group is the description which it doesn't contain the substring " at " inside.
+* Third group is the single product price.
+[More details here](https://regexr.com/4navv)

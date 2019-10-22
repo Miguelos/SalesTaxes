@@ -1,4 +1,4 @@
-package me.miguelos.taxcalculator.model;
+package me.miguelos.taxcalculator.domain.model;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,4 +1,4 @@
-package me.miguelos.taxcalculator;
+package me.miguelos.taxcalculator.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Scanner;
-import me.miguelos.taxcalculator.model.Item;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import me.miguelos.taxcalculator.domain.model.Item;
 import org.junit.jupiter.api.Test;
 
 class TaxCalculatorTest {
@@ -48,19 +50,25 @@ class TaxCalculatorTest {
 
       while (scanner.hasNext()) {
         String line = scanner.nextLine();
-        String[] split = line.split(" at ");
-        BigDecimal price = BigDecimal.valueOf(Double.parseDouble(split[1]));
-        int firstSpace = split[0].indexOf(' ');
-        int quantity = Integer.parseInt(split[0].substring(0, firstSpace));
-        String description = split[0].substring(firstSpace + 1);
-        Item it = new Item(
-            description.contains("imported"),
-            !(description.contains("book") || description.contains("chocolate") || description
-                .contains("pills")),
-            description,
-            price
-        );
-        tc.addItem(quantity, it);
+        Pattern linePattern = Pattern.compile("(\\d+) (.*) at (\\d+\\.\\d{2})");
+
+        Matcher m = linePattern.matcher(line);
+        if (m.find()) {
+          BigDecimal price = BigDecimal.valueOf(Double.parseDouble(m.group(3)));
+          int quantity = Integer.parseInt(m.group(1));
+          String description = m.group(2);
+
+          Item it = new Item(
+              description.contains("imported"),
+              !(description.contains("book") || description.contains("chocolate") || description
+                  .contains("pills")),
+              description,
+              price
+          );
+          tc.addItem(quantity, it);
+        } else {
+          throw new IllegalArgumentException("Wrong input file format");
+        }
       }
       scanner.close();
     } catch (IOException e) {
